@@ -166,10 +166,20 @@ h2{
   font-variant-numeric:tabular-nums; white-space:nowrap;
 }
 .clock svg{width:15px; height:15px; flex:none}
+.clock .ct{line-height:1.2}
+.clock br.m{display:none}
 .clock svg *{fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round}
 .chev{flex:none; width:13px; height:13px; color:var(--muted); transition:transform .18s ease}
 .chev *{fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
 .head[aria-expanded="true"] .chev{transform:rotate(90deg)}
+@media (max-width:620px){
+  /* En el móvil el reloj largo se parte en dos líneas y la tarjeta se aprieta un poco,
+     para que el título y el subtítulo no queden a una palabra por línea. */
+  .clock br.m{display:inline}
+  .line{padding-left:46px}
+  .dot{left:-46px}
+  .head{gap:10px; padding:14px}
+}
 
 .tag{
   flex:none; font-family:var(--display); font-size:11px; font-weight:700;
@@ -453,7 +463,7 @@ footer{padding:52px 0 60px; color:var(--muted); font-size:14.5px}
         <div class="dot">2</div>
         <button class="head" aria-expanded="false" data-panel="p2">
           <span class="ttl"><b>Antes del entreno o del partido</b><span>Todo se programa por adelantado.</span></span>
-          <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>10 min / semana</span>
+          <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg><span class="ct">10 min /<br class="m"> semana</span></span>
           <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
         </button>
 
@@ -594,7 +604,7 @@ footer{padding:52px 0 60px; color:var(--muted); font-size:14.5px}
         <div class="dot">4</div>
         <button class="head" aria-expanded="false" data-panel="p4">
           <span class="ttl"><b>Después del entreno y del partido</b><span>Aquí el vídeo se convierte en valor.</span></span>
-          <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>según el rol</span>
+          <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg><span class="ct">según<br class="m"> el rol</span></span>
           <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
         </button>
 
