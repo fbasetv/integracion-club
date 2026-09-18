@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Los partidos de tu club ya se graban. En cinco pasos, cómo convertirlos en valor para todo el club. Temporada 26/27.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FBASE.Tv">
+<meta property="og:title" content="Integrar FBASE.Tv en tu club">
+<meta property="og:description" content="Los partidos de tu club ya se graban. En cinco pasos, cómo convertirlos en valor para todo el club.">
+<meta property="og:url" content="https://fbasetv.github.io/integracion-club/">
+<meta property="og:image" content="https://fbasetv.github.io/integracion-club/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_ES">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<!-- A partir de aquí: copia literal de procesos/landing-integracion.html (repositorio Claude-Team-base-comun) -->
+<title>Integrar FBASE.Tv en tu club</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Karla:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --ground:#fafcf8;
+  --surface:#ffffff;
+  --tint:#f1f7ea;
+  --ink:#16241d;
+  --heading:#00482B;
+  --muted:#66786f;
+  --line:#dde6dc;
+  --accent:#00A82D;
+  --accent-2:#98C11D;
+  --warn:#E04E39;
+  --shadow:0 1px 2px rgba(0,72,43,.05), 0 8px 24px -12px rgba(0,72,43,.14);
+  --display:"Archivo","Segoe UI",Helvetica,Arial,sans-serif;
+  --body:"Karla","Segoe UI",Helvetica,Arial,sans-serif;
+}
+/* Paleta única, siempre clara: es una página de marca y se ve igual en todas partes. */
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--body); font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 24px}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 8px}
+.eyebrow{
+  font-family:var(--display); font-size:11.5px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent);
+}
+h1{
+  font-family:var(--display); font-weight:800; font-size:clamp(34px,6vw,52px);
+  line-height:1.04; letter-spacing:-.025em; color:var(--heading);
+  margin:16px 0 0; text-wrap:balance; max-width:16ch;
+}
+h1 em{font-style:normal; color:var(--accent)}
+.h1sub{
+  margin:14px 0 0; font-family:var(--display); font-weight:700;
+  font-size:clamp(20px,3.1vw,27px); line-height:1.18; letter-spacing:-.02em;
+  color:var(--heading); max-width:22ch; text-wrap:balance;
+}
+.h1sub em{font-style:normal; color:var(--accent)}
+.lead{margin:18px 0 0; font-size:17.5px; color:var(--muted); max-width:56ch}
+
+.hero-note{
+  margin:24px 0 0; padding:15px 19px; background:var(--tint);
+  border-left:3px solid var(--accent-2); border-radius:0 6px 6px 0;
+  font-size:16.5px; line-height:1.5; color:var(--ink); max-width:58ch;
+}
+.hero-note b{color:var(--heading); font-weight:700}
+
+.asks{list-style:none; margin:38px 0 0; padding:0; display:grid; gap:10px}
+.asks li{
+  display:flex; gap:14px; align-items:baseline;
+  font-family:var(--display); font-weight:600; font-size:clamp(19px,2.8vw,23px);
+  line-height:1.25; letter-spacing:-.015em; color:var(--heading);
+}
+.asks li::before{
+  content:"?"; flex:none; width:26px; height:26px; border-radius:50%;
+  background:var(--accent-2); color:var(--heading); font-size:15px; font-weight:800;
+  display:grid; place-items:center; transform:translateY(2px);
+}
+
+/* ---------- secciones ---------- */
+.sec{padding:62px 0 0}
+h2{
+  font-family:var(--display); font-weight:700; font-size:clamp(24px,3.6vw,31px);
+  letter-spacing:-.02em; line-height:1.15; color:var(--heading); margin:0;
+  text-wrap:balance;
+}
+.sec > p.intro{margin:10px 0 0; color:var(--muted); max-width:52ch}
+
+/* ---------- valor por rol ---------- */
+.roles{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:1px;
+  background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden}
+.roles li{background:var(--surface); padding:16px 20px; display:grid;
+  grid-template-columns:160px 1fr; gap:3px 24px; align-items:baseline}
+.roles b{font-family:var(--display); font-weight:700; font-size:13.5px;
+  letter-spacing:.02em; color:var(--accent); text-transform:uppercase}
+.roles span{color:var(--ink); font-size:16.5px; line-height:1.45}
+@media (max-width:620px){ .roles li{grid-template-columns:1fr; gap:5px} }
+
+/* ---------- el superusuario ---------- */
+.su{
+  margin:26px 0 0; background:var(--surface); border:1px solid var(--line);
+  border-left:4px solid var(--accent); border-radius:8px; padding:26px 28px;
+  box-shadow:var(--shadow);
+}
+.su p{margin:0 0 14px; font-size:17px; max-width:58ch}
+.su p:last-child{margin-bottom:0}
+.su .perfil{list-style:none; margin:0 0 16px; padding:0; display:grid; gap:8px}
+.su .perfil li{display:flex; gap:11px; align-items:flex-start; font-size:16.5px; line-height:1.4}
+.su .perfil li::before{
+  content:""; flex:none; width:7px; height:7px; border-radius:2px;
+  background:var(--accent); transform:translateY(9px);
+}
+.hours{
+  display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  background:var(--tint); border-radius:6px; padding:16px 18px; margin:0 0 16px;
+}
+.hours b{font-family:var(--display); font-size:27px; font-weight:800; color:var(--heading);
+  letter-spacing:-.03em; font-variant-numeric:tabular-nums; line-height:1}
+.hours span{font-size:16px; color:var(--ink); max-width:44ch}
+
+/* ---------- la línea de la temporada ---------- */
+.total{
+  margin:24px 0 0; display:flex; gap:34px; flex-wrap:wrap;
+}
+.total div{display:flex; flex-direction:column; gap:2px}
+.total b{font-family:var(--display); font-size:34px; font-weight:800; color:var(--heading);
+  letter-spacing:-.03em; font-variant-numeric:tabular-nums; line-height:1.05}
+.total span{color:var(--muted); font-size:15.5px}
+
+.line{position:relative; margin:34px 0 0; padding:0 0 0 54px}
+.line::before{
+  content:""; position:absolute; left:17px; top:10px; bottom:10px; width:2px;
+  background:linear-gradient(180deg,var(--accent) 0%,var(--accent) 22%,var(--line) 34%,var(--line) 100%);
+  border-radius:2px;
+}
+.stop{position:relative; padding:0 0 6px}
+.stop + .stop{margin-top:6px}
+.dot{
+  position:absolute; left:-54px; top:6px; width:36px; height:36px; border-radius:50%;
+  background:var(--surface); border:2px solid var(--line); color:var(--muted);
+  font-family:var(--display); font-weight:800; font-size:16px;
+  display:grid; place-items:center; font-variant-numeric:tabular-nums;
+}
+.stop.live .dot{background:var(--accent); border-color:var(--accent); color:#fff}
+
+.head{
+  width:100%; text-align:left; background:var(--surface); border:1px solid var(--line);
+  border-radius:8px; padding:16px 18px; cursor:pointer; font:inherit; color:inherit;
+  display:flex; align-items:center; gap:16px; box-shadow:var(--shadow);
+}
+.head:hover{border-color:var(--accent)}
+.head:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.head .ttl{flex:1; min-width:0}
+.head .ttl b{display:block; font-family:var(--display); font-weight:700; font-size:19px;
+  letter-spacing:-.015em; color:var(--heading); line-height:1.2}
+.head .ttl span{display:block; margin-top:3px; font-size:15px; color:var(--muted)}
+.clock{
+  display:inline-flex; align-items:center; gap:6px; flex:none;
+  font-family:var(--display); font-weight:700; font-size:14px; color:var(--accent);
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+.clock svg{width:15px; height:15px; flex:none}
+.clock svg *{fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round}
+.chev{flex:none; width:13px; height:13px; color:var(--muted); transition:transform .18s ease}
+.chev *{fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+.head[aria-expanded="true"] .chev{transform:rotate(90deg)}
+
+.tag{
+  flex:none; font-family:var(--display); font-size:11px; font-weight:700;
+  letter-spacing:.09em; text-transform:uppercase; color:var(--warn);
+  border:1px solid var(--warn); border-radius:4px; padding:3px 7px;
+}
+
+.panel{display:none; padding:6px 0 12px}
+.panel.open{display:block}
+
+/* ---------- subtareas ---------- */
+.task{border-bottom:1px solid var(--line)}
+.task:last-child{border-bottom:none}
+.task > button{
+  width:100%; text-align:left; background:none; border:0; font:inherit; color:inherit;
+  padding:13px 4px; cursor:pointer; display:flex; align-items:center; gap:14px;
+}
+.task > button:hover .tname{color:var(--accent)}
+.task > button:focus-visible{outline:2px solid var(--accent); outline-offset:-2px; border-radius:4px}
+.tname{flex:1; font-weight:600; font-size:16.5px; color:var(--ink); line-height:1.35}
+.who{
+  flex:none; font-family:var(--display); font-size:11px; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
+  background:var(--tint); border-radius:3px; padding:3px 7px; white-space:nowrap;
+}
+@media (max-width:620px){ .who{display:none} }
+.tbody{display:none; padding:0 4px 18px 0}
+.tbody.open{display:block}
+.tbody p{margin:0 0 12px; font-size:16.5px; color:var(--ink); max-width:58ch}
+.tbody p:last-child{margin-bottom:0}
+
+.short{
+  margin:0 0 12px; padding:14px 16px; background:var(--tint); border-radius:6px;
+  font-size:16.5px; line-height:1.5; color:var(--ink);
+}
+.short b{color:var(--heading); font-weight:700}
+
+.vids{display:flex; flex-wrap:wrap; gap:9px; margin-top:4px}
+.vid{
+  display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+  border:1px solid var(--accent); border-radius:6px; padding:9px 14px 9px 11px;
+  background:var(--surface); color:var(--accent); font-weight:600; font-size:15.5px;
+}
+.vid:hover{background:var(--tint)}
+.vid:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.play{flex:none; width:22px; height:22px; border-radius:50%; background:var(--accent);
+  display:grid; place-items:center}
+.play::after{content:""; border-left:7px solid #fff; border-top:4.5px solid transparent;
+  border-bottom:4.5px solid transparent; margin-left:2px}
+
+/* ---------- oferta ---------- */
+.offer{
+  margin:62px 0 0; background:var(--tint); border:1px solid var(--accent-2);
+  border-radius:10px; padding:32px 30px;
+}
+.offer h2{font-size:27px}
+.offer p{margin:12px 0 0; font-size:17px; max-width:54ch}
+.price{
+  margin-top:18px; font-family:var(--display); font-size:17px; font-weight:700;
+  color:var(--heading);
+}
+
+/* ---------- ayuda ---------- */
+.help{
+  margin:34px 0 0; background:var(--heading); border-radius:10px; padding:32px 30px; color:#fff;
+}
+.help h2{color:inherit; font-size:25px}
+.help p{margin:12px 0 0; opacity:.85; max-width:50ch; font-size:16.5px}
+.wa{
+  display:inline-flex; align-items:center; gap:11px; margin-top:20px; text-decoration:none;
+  background:var(--accent); color:#fff; font-family:var(--display); font-weight:700;
+  font-size:18px; letter-spacing:-.01em; padding:13px 22px; border-radius:7px;
+  font-variant-numeric:tabular-nums;
+}
+.wa:hover{filter:brightness(1.08)}
+.wa:focus-visible{outline:2px solid #fff; outline-offset:3px}
+.wa svg{width:20px; height:20px; flex:none}
+.wa svg *{fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round}
+
+footer{padding:52px 0 60px; color:var(--muted); font-size:14.5px}
+
+@media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Integración FBASE.Tv &middot; Temporada 26/27</div>
+    <h1>Los partidos de tu club ya se graban.</h1>
+    <p class="h1sub">Ahora conviértelos en <em>valor para todo el club</em>.</p>
+    <p class="lead">Análisis, formación, comunicación, contenidos, jugadores, familias y mucho más.
+    En solo cinco pasos te enseñamos cómo aprovechar todo lo que FBASE.Tv ya genera cada semana para
+    tu club.</p>
+
+    <ul class="asks">
+      <li>¿Sabes cómo entrenan tus equipos?</li>
+      <li>¿Sabes qué ocurrió de verdad cuando tú no estabas?</li>
+      <li>¿Sabes qué coordinadores y entrenadores están avanzando contigo y cuáles se están quedando atrás?</li>
+    </ul>
+
+    <p class="hero-note"><b>A la última te respondemos nosotros:</b> un informe del uso de FBASE.Tv en
+    tu club, equipo por equipo y usuario por usuario.</p>
+  </header>
+
+  <section class="sec">
+    <h2>El valor de integrar FBASE.Tv en el club, rol por rol</h2>
+
+    <ul class="roles">
+      <li><b>El club</b><span>Genera un activo de valor incalculable para su ecosistema: el vídeo, en directo y en diferido. Y con él, el mágico mundo del fútbol después del partido: elegir el mejor gol de la semana, sacar contenido para las redes, seguir lo que pasa en todos los equipos. Sin invertir tiempo extra.</span></li>
+      <li><b>La presidencia</b><span>Dirige el club contrastando todas las decisiones: lo tienes todo en imágenes, para comprobarlo en el momento que tú quieras.</span></li>
+      <li><b>La coordinación</b><span>Dirige con rigor e implanta el fútbol que de verdad queréis jugar. Evalúa tu metodología de entreno, marca y comparte con los entrenadores lo que quieras cambiar. Que no te cuenten cuentos: con el vídeo solo cabe la verdad.</span></li>
+      <li><b>Los entrenadores</b><span>Todas las ventajas y la eficiencia de la profesionalización: menos tiempo, mejores resultados.</span></li>
+      <li><b>Los jugadores</b><span>Autoformación sin depender de nadie, con el vídeo de sus partidos y las herramientas de análisis. Y su perfil deportivo se va creando sin esfuerzo.</span></li>
+      <li><b>Las familias</b><span>Acompañan a los que más quieren en todo momento y viven el fútbol más allá del partido.</span></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h2>Empieza por elegir a tu Superusuario</h2>
+    <p class="intro">Es la única decisión que no puedes delegar. Todo lo demás lo coordina esa
+    persona, en solo 45 minutos a la semana.</p>
+
+    <div class="su">
+      <p>El <b>Superusuario de FBASE</b> es tu punto de contacto con nosotros y tiene permisos sobre
+      todo el club. Puede ser uno de tus coordinadores, o alguien con otro papel. Lo que cuenta no es
+      el cargo: es que le interese esto y se maneje con la tecnología.</p>
+
+      <p><b>Perfil ideal:</b></p>
+      <ul class="perfil">
+        <li>Le interesa la tecnología aplicada al deporte.</li>
+        <li>Está cerca de la coordinación o de la presidencia.</li>
+        <li>Tiene ganas de profesionalizar esta parte del club.</li>
+      </ul>
+
+      <div class="hours">
+        <b>45 min</b>
+        <span>a la semana. La agenda, un repaso de que todos los partidos estén programados y
+        marcados, y un empujón a los equipos que se quedan atrás.</span>
+      </div>
+
+      <p>Designa a alguien que tenga de verdad esos 45 minutos. Si nadie los tiene, dínoslo:
+      te proponemos cómo lo podemos hacer nosotros.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2>La temporada, en cinco pasos</h2>
+
+    <div class="total">
+      <div><b>1 h 15 min</b><span>montarlo, una sola vez</span></div>
+      <div><b>45 min</b><span>cada semana, para mantenerlo</span></div>
+    </div>
+
+    <div class="line">
+
+      <!-- ============ PASO 1 ============ -->
+      <div class="stop live">
+        <div class="dot">1</div>
+        <button class="head" aria-expanded="true" data-panel="p1">
+          <span class="ttl"><b>Pretemporada</b><span>Dejar el club montado. Se hace una vez.</span></span>
+          <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>1 h 15 min</span>
+          <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+        </button>
+
+        <div class="panel open" id="p1">
+
+          <div class="task">
+            <button aria-expanded="false" data-body="t1">
+              <span class="tname">Designa a tu Superusuario</span>
+              <span class="who">Presidencia</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>5 min</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="t1">
+              <p>Elige a la persona y pásanos su nombre y su teléfono. Con eso abrimos dos grupos de
+              WhatsApp: uno contigo y tu Superusuario, y otro con los entrenadores, para acompañarlos
+              y guiarlos en cualquier momento.</p>
+              <div class="short"><b>Danos un nombre y un teléfono.</b> De los grupos nos encargamos
+              nosotros.</div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="t2">
+              <span class="tname">Pon al día tus equipos</span>
+              <span class="who">Superusuario</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>15 min</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="t2">
+              <p>Repasa que los equipos de esta temporada estén <b>activos</b>. Si alguno ya existe
+              pero está en estado <b>desactivado</b>, cámbialo a activo. Y si hay equipos que esta
+              temporada no van a competir, ponlos en desactivado.</p>
+              <p>¿Te falta un equipo? Créalo tú mismo. Entra en <b>admin.fbase.tv</b>, ve a la sección
+              <b>Equipos</b> y haz clic en <b>NUEVO</b>, a la derecha de la pantalla. Solo hay que
+              rellenar el formulario.</p>
+              <div class="short"><b>Lo repasamos nosotros después.</b> Si algo no encaja, lo vemos y lo
+              arreglamos.</div>
+              <div class="vids">
+                <a class="vid" href="https://youtu.be/qiYzQc0nQQY"><span class="play"></span>Activar y desactivar equipos</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="t3">
+              <span class="tname">Recupera los roles de la temporada pasada</span>
+              <span class="who">Superusuario</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>15 min</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="t3">
+              <p>Al cerrarse la temporada, los roles de todo el club quedaron archivados. Hay que
+              reactivarlos. Mira el vídeo de cómo hacerlo.</p>
+              <div class="vids">
+                <a class="vid" href="https://www.youtube.com/watch?v=s5e2qX9jJ14"><span class="play"></span>Cómo asignar y confirmar los roles</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="t4">
+              <span class="tname">Asigna la liga y el grupo de cada equipo</span>
+              <span class="who">Superusuario</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>20 min</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="t4">
+              <p>Cuando la federación publique la liga exacta de cada equipo, edita ese equipo y
+              asígnale su liga completa. Un par de clics.</p>
+              <p>Mientras un equipo no tenga liga asignada, puedes usarlo igual para <b>amistosos y
+              partidos de pretemporada</b>.</p>
+              <div class="short">¿No encuentras el grupo? <b>Escríbenos al WhatsApp de soporte y lo
+              creamos lo antes posible.</b></div>
+              <div class="vids">
+                <a class="vid" href="https://www.youtube.com/watch?v=GQOrtiqUsjM"><span class="play"></span>Cómo asignar la liga y el grupo</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="t5">
+              <span class="tname">Dinos cómo repartís los campos en fútbol 7</span>
+              <span class="who">Superusuario</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>5 min</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="t5">
+              <p>¿Dos equipos jugando a la vez, cada uno en una mitad? Dinos cuál va a cada lado. Será
+              vuestro criterio. Por ejemplo:</p>
+              <div class="short"><b>La categoría mayor juega siempre en el campo de la izquierda.</b>
+              Adóptala o dinos la tuya.</div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="t6">
+              <span class="tname">Elige a los Asistentes de Marcación</span>
+              <span class="who">Superusuario</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>15 min</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="t6">
+              <p>Elige a uno o dos por equipo a los que les guste hacerlo: un jugador, el segundo
+              entrenador, un padre o una madre. Marcar es dar unos toques en el móvil mientras se
+              juega, y acaba gustando a quien lo hace.</p>
+              <p>Así todo el club sigue el partido <b>en tiempo real</b>: las familias, los aficionados,
+              quien no ha podido ir. Y si está bien marcado, después el resumen deja ver los mejores
+              momentos.</p>
+              <div class="short"><b>Esta función tiene premio:</b> licencia member con directos y dos
+              usuarios. Úsalo para recompensar a quien se encargue. Danos su nombre y su correo.</div>
+              <p>Cómo se marca se lo explicamos en el paso de partidos.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============ PASOS 2-5 ============ -->
+      <div class="stop">
+        <div class="dot">2</div>
+        <button class="head" aria-expanded="false" data-panel="p2">
+          <span class="ttl"><b>Antes del entreno o del partido</b><span>Todo se programa por adelantado.</span></span>
+          <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>10 min / semana</span>
+          <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+        </button>
+
+        <div class="panel" id="p2">
+
+          <div class="task">
+            <button aria-expanded="false" data-body="b1">
+              <span class="tname">Programa los entrenos y los partidos</span>
+              <span class="who">Superusuario o entrenador</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>10 min</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="b1">
+              <p>Los entrenos y los partidos hay que crearlos y programarlos por adelantado. Se hace
+              desde <b>admin.fbase.tv</b>: entra en la sección <b>Partidos</b> o <b>Entrenamientos</b>,
+              haz clic en <b>NUEVO</b> y rellena los campos.</p>
+              <div class="short"><b>Los entrenos se programan una sola vez.</b> Los creas con su día y
+              su hora, marcas que se repitan, y quedan puestos hasta final de temporada. Los partidos
+              van jornada a jornada.</div>
+              <p>Los entrenos también los puedes programar desde web.fbase.tv:</p>
+              <div class="vids">
+                <a class="vid" href="https://www.youtube.com/watch?v=4lDNlQqy1c0&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=7"><span class="play"></span>Programar un entreno desde web.fbase.tv</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="b2">
+              <span class="tname">O mándanos la agenda y la programamos nosotros</span>
+              <span class="who">Superusuario</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>2 min</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="b2">
+              <p>Si prefieres no programarlos tú, mándanos la agenda de la jornada <b>antes del
+              miércoles</b> y lo hacemos nosotros.</p>
+              <div class="short"><b>Nos vale el PDF de la federación tal cual</b>, ese que muchas veces
+              ya tienes descargado. No hace falta que prepares nada. Y si tienes la agenda de varios
+              meses o de toda la temporada, mándanosla entera.</div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="b3">
+              <span class="tname">Comprueba que la fecha, la hora y el campo estén bien</span>
+              <span class="who">Asistente</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>2 min</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="b3">
+              <p>Un vistazo antes de cada partido. Si hay que cambiar la hora o el campo, o aplazarlo,
+              se hace desde la app.</p>
+              <p>La grabación <b>se activa sola cinco minutos antes</b> de la hora de la ficha y se
+              cierra cinco minutos después. Por eso conviene ajustar bien el horario: así el partido
+              queda grabado correctamente y entero.</p>
+              <div class="short">¿Se ha quedado algún partido sin programar el fin de semana?
+              <b>Pídenoslo: la mayoría los podemos recuperar.</b></div>
+              <div class="vids">
+                <a class="vid" href="https://www.youtube.com/watch?v=IDbz1hLrFBI&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=5"><span class="play"></span>Cambiar la fecha de emisión</a>
+                <a class="vid" href="https://www.youtube.com/watch?v=GYMsTw0vhR8&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=4"><span class="play"></span>Asignar un campo</a>
+                <a class="vid" href="https://www.youtube.com/watch?v=x3jmt_q1qsQ&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=18"><span class="play"></span>Posponer el inicio</a>
+                <a class="vid" href="https://www.youtube.com/watch?v=tssbT1jUEAY&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=6"><span class="play"></span>Añadir más tiempo</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="dot">3</div>
+        <button class="head" aria-expanded="false" data-panel="p3">
+          <span class="ttl"><b>Durante el entreno o el partido</b><span>No hay que arrancar nada: la grabación empieza sola.</span></span>
+          <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>5–10 min</span>
+          <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+        </button>
+
+        <div class="panel" id="p3">
+
+          <div class="task">
+            <button aria-expanded="false" data-body="c1">
+              <span class="tname">Los eventos del partido los marca el Asistente</span>
+              <span class="who">Asistente</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>durante</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="c1">
+              <p>El inicio, los goles, el final. Los marca la persona asignada, y con eso todo el club
+              sigue el partido en tiempo real: las familias, los aficionados, quien no ha podido ir.</p>
+              <div class="vids">
+                <a class="vid" href="https://www.youtube.com/watch?v=6uowof6jI-w&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=9"><span class="play"></span>Crear un evento de partido</a>
+                <a class="vid" href="https://www.youtube.com/watch?v=_JeuHArjKks&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=10"><span class="play"></span>Añadir marcadores</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="c2">
+              <span class="tname">Los marcadores rápidos: cada uno el suyo</span>
+              <span class="who">Entrenador y jugadores</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>un clic</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="c2">
+              <p>Aparte de los eventos del partido, cada uno puede dejar su propia marca rápida con un
+              solo clic, sin apartar la vista del campo.</p>
+              <div class="short"><b>Al entrenador le conviene usarlo.</b> Un clic en el momento, y
+              después las edita, las comparte y deja el partido 100 % gestionado con las lecciones
+              aprendidas.</div>
+              <div class="vids">
+                <a class="vid" href="https://www.youtube.com/watch?v=md1P5M22uL8&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=11"><span class="play"></span>Añadir un marcador rápido</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="c3">
+              <span class="tname">En los entrenos, cada uno marca lo suyo</span>
+              <span class="who">Cada persona</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>un clic</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="c3">
+              <p>En un entreno no hay Asistente ni eventos de partido: cada persona marca sus propias
+              jugadas, y <b>esas marcas solo las ve quien las ha hecho</b>.</p>
+              <div class="short">Nadie tiene que ocuparse de marcar el entreno entero. Se graba solo, y
+              cada uno guarda lo que le interesa a él.</div>
+              <div class="vids">
+                <a class="vid" href="https://www.youtube.com/watch?v=YnYHVJ8qAII&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=8"><span class="play"></span>Crear eventos dentro de un entreno</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="dot">4</div>
+        <button class="head" aria-expanded="false" data-panel="p4">
+          <span class="ttl"><b>Después del entreno y del partido</b><span>Aquí el vídeo se convierte en valor.</span></span>
+          <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>según el rol</span>
+          <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+        </button>
+
+        <div class="panel" id="p4">
+
+          <div class="task">
+            <button aria-expanded="false" data-body="d1">
+              <span class="tname">Repasa la jornada entera</span>
+              <span class="who">Coordinación</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>2 min por partido</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="d1">
+              <p>Los resúmenes de todos los partidos del fin de semana, uno detrás de otro. En un rato
+              del lunes has visto cómo ha jugado todo el club.</p>
+              <div class="short">Y si algo te ha llamado la atención, entras al entreno de ese equipo y
+              ves cómo se trabaja. <b>Que no te cuenten cuentos: con el vídeo solo cabe la verdad.</b></div>
+              <div class="vids">
+                <a class="vid" href="https://www.youtube.com/watch?v=X-qpdN39Ytc&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=14"><span class="play"></span>Ver el resumen de un partido</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="d2">
+              <span class="tname">Edita tus marcas, evalúa y comparte las jugadas</span>
+              <span class="who">Entrenador</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>10 min</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="d2">
+              <p>Puedes editar tus marcas rápidas <b>en directo</b>, o volver a ver el partido con
+              calma y editarlas, evaluarlas y compartirlas. Así el partido queda 100 % gestionado, con
+              las lecciones aprendidas.</p>
+              <div class="short"><b>Se ve, no se discute.</b> Cinco minutos de vídeo delante del equipo
+              valen más que media hora de explicación, y lo que se corrige el martes no se repite el
+              domingo siguiente.</div>
+              <div class="vids">
+                <a class="vid" href="https://www.youtube.com/watch?v=md1P5M22uL8&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=11"><span class="play"></span>Editar tus marcas</a>
+                <a class="vid" href="https://www.youtube.com/watch?v=MdEWRafnHk4&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=15"><span class="play"></span>Filtrar entre las marcas</a>
+                <a class="vid" href="https://www.youtube.com/watch?v=2BLZoBTH3DY&list=PLdawitbMlTwMshnm0pXgERWFfh-hDMSYD&index=16"><span class="play"></span>Votar y compartir jugadas</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="d3">
+              <span class="tname">Cada jugador revisa y marca lo suyo</span>
+              <span class="who">Jugadores</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>por su cuenta</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="d3">
+              <p>Se marcan ellos mismos y mejoran <b>sin depender de nadie</b>. Ven sus partidos,
+              guardan sus jugadas y las comparten. Para muchos es la primera vez que pueden estudiar
+              cómo juegan.</p>
+              <div class="short"><b>Dilo en el vestuario y anímalos a hacerlo.</b> En cuanto tienen su
+              rol activo pueden entrar solos, y su perfil deportivo se va completando con ellos. Un
+              empujón del entrenador es lo que marca la diferencia entre que lo usen o no.</div>
+            </div>
+          </div>
+
+          <div class="task">
+            <button aria-expanded="false" data-body="d5">
+              <span class="tname">Y nosotros te pasamos el informe de uso del club</span>
+              <span class="who">FBASE.Tv</span>
+              <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>lo recibes tú</span>
+              <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+            </button>
+            <div class="tbody" id="d5">
+              <p>Después de cada semana o cada mes de actividad te pasamos el uso de FBASE.Tv en tu
+              club, <b>equipo por equipo y usuario por usuario</b>: quién está avanzando contigo y
+              quién se está quedando atrás.</p>
+              <div class="short">La idea es no esperar a junio para ver cómo va la cosa. Si un equipo se
+              para, que se note a tiempo y se pueda arreglar. <b>Lo pondremos en marcha en breve.</b></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="dot">5</div>
+        <button class="head" aria-expanded="false" data-panel="p5">
+          <span class="ttl"><b>Fin de temporada</b><span>Automático. Sin acción requerida.</span></span>
+          <span class="clock"><svg viewBox="0 0 20 20"><circle cx="10" cy="10.6" r="7"/><path d="M10 10.6V6.8M10 10.6l3 1.8"/></svg>0 min</span>
+          <svg class="chev" viewBox="0 0 12 12"><path d="M4 2l5 4-5 4"/></svg>
+        </button>
+        <div class="panel" id="p5">
+          <div class="tbody open" style="padding-top:14px">
+            <p>Se cierra sola y los roles se archivan solos. La temporada que viene no empiezas de
+            cero: recuperas los roles y arrancas con el grueso de tu club ya registrado.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="offer">
+    <h2>¿Prefieres que lo hagamos nosotros?</h2>
+    <p>Si no tienes a nadie con esos 45 minutos, nos encargamos de la integración completa.</p>
+    <p class="price">Desde ahí lo dirigimos nosotros. Si te interesa, nos sentamos y lo hablamos.</p>
+  </section>
+
+  <section class="help">
+    <h2>Cualquier cosa, escríbenos</h2>
+    <p>Un grupo que no aparece, un jugador que no está en su equipo, un partido que no arrancó. Cuanto
+    antes nos llegue, antes se arregla.</p>
+    <a class="wa" href="https://wa.me/34679984866">
+      <svg viewBox="0 0 20 20"><path d="M3.4 16.6l1-3.4a6.6 6.6 0 1 1 2.5 2.5l-3.5.9Z"/></svg>
+      +34 679 98 48 66
+    </a>
+  </section>
+
+  <footer>FBASE.Tv &middot; Guía de integración del club, temporada 2026/2027.</footer>
+</div>
+
+<script>
+document.querySelectorAll(".head").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var panel = document.getElementById(btn.dataset.panel);
+    var open = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!open));
+    panel.classList.toggle("open", !open);
+  });
+});
+
+document.querySelectorAll(".task > button").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    var body = document.getElementById(btn.dataset.body);
+    var open = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!open));
+    body.classList.toggle("open", !open);
+  });
+});
+</script>
